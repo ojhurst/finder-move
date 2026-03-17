@@ -6,6 +6,8 @@ Ever copy a file and wish you could *move* it instead of pasting a duplicate? ma
 
 ![macOS 13+](https://img.shields.io/badge/macOS-13%2B-blue) ![License: MIT](https://img.shields.io/badge/License-MIT-green)
 
+<img src="screenshot.png" alt="Move Item Here (Paste) in the Finder context menu" width="400">
+
 ## How it works
 
 1. **Copy** a file or folder in Finder (`Cmd+C`)
