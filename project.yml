@@ -1,0 +1,51 @@
+name: MoveHelper
+options:
+  deploymentTarget:
+    macOS: "13.0"
+  bundleIdPrefix: com.ojhurst
+
+settings:
+  base:
+    CODE_SIGN_IDENTITY: "-"
+    CODE_SIGN_STYLE: Manual
+    DEVELOPMENT_TEAM: ""
+
+targets:
+  MoveHelper:
+    type: application
+    platform: macOS
+    sources:
+      - MoveHelper
+    info:
+      path: MoveHelper/Info.plist
+      properties:
+        LSUIElement: true
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.ojhurst.MoveHelper
+        INFOPLIST_FILE: MoveHelper/Info.plist
+        CODE_SIGN_ENTITLEMENTS: MoveHelper/MoveHelper.entitlements
+        LD_RUNPATH_SEARCH_PATHS: "$(inherited) @executable_path/../Frameworks"
+        ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES: true
+    dependencies:
+      - target: MoveHereExtension
+
+  MoveHereExtension:
+    type: app-extension
+    platform: macOS
+    sources:
+      - MoveHereExtension
+    info:
+      path: MoveHereExtension/Info.plist
+      properties:
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.FinderSync
+          NSExtensionPrincipalClass: $(PRODUCT_MODULE_NAME).FinderSync
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.ojhurst.MoveHelper.MoveHereExtension
+        INFOPLIST_FILE: MoveHereExtension/Info.plist
+        CODE_SIGN_ENTITLEMENTS: MoveHereExtension/MoveHereExtension.entitlements
+        LD_RUNPATH_SEARCH_PATHS: "$(inherited) @executable_path/../Frameworks @executable_path/../../../../Frameworks"
+    frameworks:
+      - sdk: FinderSync.framework
